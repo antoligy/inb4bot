@@ -1,4 +1,9 @@
-## inb4bot v1
+## inb4bot v1r2
+#
+#	Useless waste of time that fulfils inb4s.
+#	Requires stock python2.6 libraries, as well as twisted.
+#	Usage: python inb4bot.py irc.server 6667 channel
+#	   eg: nohup irc.stormbit.net 6667 test &
 #
 #	Copyright (c) 2011 Alex "Antoligy" Wilson <antoligy@antoligy.com>
 #
@@ -46,14 +51,15 @@ class inb4(irc.IRCClient):
 		if not user:
         		return
 
-		if 'inb4' in msg:
+		if msg.startswith('inb4'):
 			self.msg(self.factory.channel, string.strip(msg[4:]))
 			print "Repeated \"%s\" by \"%s\"" % (string.strip(msg[4:]), user,)
 
 	def action(self, user, channel, data):
 		if not user:
 			return
-		if 'inb4' in data:
+
+		if data.startswith('inb4'):
 			self.describe(self.factory.channel, string.strip(data[4:]))
 			print "Repeated \"%s\" by \"%s\" (action)" % (string.strip(data[4:]), user,)
 
