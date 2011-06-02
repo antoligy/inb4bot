@@ -63,6 +63,10 @@ class inb4(irc.IRCClient):
 			self.describe(self.factory.channel, string.strip(data[4:]))
 			print "Repeated \"%s\" by \"%s\" (action)" % (string.strip(data[4:]), user,)
 
+	def kickedFrom(self, channel, kicker, message):
+		print "Kicked by %s." % (kicker,)
+		self.join(self.factory.channel)
+
 class inb4Factory(protocol.ClientFactory):
 	protocol = inb4
 	def __init__(self, channel,):
